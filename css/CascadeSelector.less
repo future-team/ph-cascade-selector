@@ -1,0 +1,39 @@
+.cascade-selector{
+    .cs-item{
+        padding: 15px;
+        font-size: 13px;
+        border-bottom: 1px solid #b7b7b7;
+        &.item-branch::after{
+            content: '';
+            display: inline-block;
+            width: 7px;
+            height: 13px;
+            background-image: url(./img/right-arrow.png);
+            background-size:7px 13px ;
+            position: absolute;
+            right: 15px;
+        }
+        &.item-leaf {
+            position: relative;
+            .item-content{
+                margin-left: 32px;
+            }
+            .checkbox{
+                display: inline-block;
+                width: 22px;
+                height: 22px;
+                background-image: url(./img/unchecked.png);
+                background-size:22px 22px ;
+                top: 11px;
+                position: absolute;
+                left: 15px;
+            }
+            &.active{
+                .checkbox{
+                    background-image: url(./img/checked.png);
+                    background-size:22px 22px ;
+                }
+            }
+        }
+    }
+}
