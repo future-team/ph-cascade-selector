@@ -1,8 +1,38 @@
+.translate(@distance){
+    -moz-transform: translate(@distance);
+    -webkit-transform: translate(@distance);
+    -ms-transform: translate(@distance);
+    -o-transform: translate(@distance);
+    transform: translate(@distance);
+    -moz-transition-duration: 500ms;
+    -wekit-transition-duration: 500ms;
+    -ms-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+.generate-translate(@n, @i: -@n) when (@i =< @n) {
+    .translate-@{i} {
+        .translate(@i * 100%);
+    }
+    .generate-translate(@n, (@i + 1));
+}
+.generate-translate(10);
+
 .cascade-selector{
+
+    .cs-panel{
+        position: fixed;
+        top:0px;
+        bottom: 0px;
+        width: 100%;
+        overflow-y: scroll;
+        z-index: 500;
+        background-color: #ffffff;
+    }
     .cs-item{
         padding: 15px;
         font-size: 13px;
-        border-bottom: 1px solid #b7b7b7;
+        border-bottom: 1px solid #d7d7d7;
         &.item-branch::after{
             content: '';
             display: inline-block;

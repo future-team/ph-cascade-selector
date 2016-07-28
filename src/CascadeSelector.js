@@ -14,7 +14,7 @@ export default class CascadeSelector extends Component{
 
         }
         let {selectorData}=this.props;
-        this.generateTreePathMap('',selectorData,pathMap);
+        //this.generateTreePathMap('',selectorData,pathMap);
         this.pathMap=pathMap;
         this.hashId=this.uniqueId();
         this.preHash='';
@@ -52,7 +52,7 @@ export default class CascadeSelector extends Component{
         let self=this;
         window.onhashchange=function(){
             var {preHashIndex,curHashIndex}=self.preAndCurHashIndex();
-            console.log('p,c',preHashIndex,curHashIndex);
+            //console.log('p,c',preHashIndex,curHashIndex);
             //用于处理用户点击返回按钮，这个时候需要监听hashChange事件，手动去设置hashKey和tappedIndexArray
             if(preHashIndex-curHashIndex>0){
                 let tappedIndexArray=self.state.tappedIndexArray.slice();
@@ -62,7 +62,7 @@ export default class CascadeSelector extends Component{
                     // 此时pop会存在删不干净的情况，需要手动置空tappedIndexArray
                     tappedIndexArray.length=0;
                 }
-                console.log(tappedIndexArray);
+                //console.log(tappedIndexArray);
                 self.setState({
                     hashKey: curHashIndex,
                     tappedIndexArray
@@ -104,13 +104,23 @@ export default class CascadeSelector extends Component{
             tappedIndexArray,
             hashKey
         })
-        location.hash='#'+this.hashId+'_'+hashKey
+        location.hash='#'+this.hashId+'_'+hashKey;
+        this.props.itemClick&&this.props.itemClick({
+            [this.props.itemKey]:item[this.props.itemKey],
+            [this.props.itemValue]:item[this.props.itemValue],
+            nodeType:'branch'
+        })
     }
     leafNodeClick(item,index){
         let preHashKey=this.state.hashKey;
         //执行会退操作，hashChange会负责state的变化
         this.selectedItem=item;
         window.history.go(-preHashKey);
+        this.props.itemClick&&this.props.itemClick({
+            [this.props.itemKey]:item[this.props.itemKey],
+            [this.props.itemValue]:item[this.props.itemValue],
+            nodeType:'leaf'
+        })
     }
     render(){
         let self=this,
@@ -139,6 +149,7 @@ export default class CascadeSelector extends Component{
                         :
                     panelList.map((itemList,selectorLevel)=>{
                         return (<div key={'selector-'+selectorLevel}
+                                     className='cs-panel'
                                      style={{display:selectorLevel==tappedIndexArray.length?'block':'none'}}>
                             {
                                 itemList.map((item,itemIndex)=>{
