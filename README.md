@@ -1,26 +1,41 @@
-# module-template
+# ph-cascade-selector
 
-这是一个模块组件开发的脚手架项目，用于快速搭建模块开发项目。
-
-## 使用
-
-- 下载此项目至本地，修改项目名称和package.json里的信息；
-- git remote rm origin
-- git remote add origin {你的仓库地址}  例如：git remote add origin git@code.dianpingoa.com:pc-trade-f2e/apollo-template-static.git
-- git fetch
-- git pull origin master
-
-- 全局安装smartDoc 用于生成文档
-
-## Command
-
+级联选择
+```jsx
+<CascadeSelector    selectorData={this.state.selectorData}
+                    itemClick={function(item){
+                        console.log(item);
+                    }}
+                    label='选择问题分类'>
+</CascadeSelector>
 ```
-	#测试	
-	npm run test	
-	#打包	
-	npm run build	
-	#例子演示	
-	npm run demo	
+回调返回值如下：
+```js
+ {typeId: 1000024, typeName: "ppe测试", nodeType: "leaf"}
+ {typeId: 8, typeName: "页面展示/排序", nodeType: "branch"}
 ```
+
+##  API
+View [example](/example/src/index.js) to get more details
+
+#### `<CascadeSelector>` Props:
+- selectorData 级联选择的数据 .
+- itemClick 每当item被选择（不论叶子节点还是树枝节点被选中），都会调用itemClick回调，nodeType用来区分哪个类型的节点被选择.
+- label 用户没有选择任何item时，默认展示的文字.
+
+
+
+### Contributing
+
+- Fork the project
+- Run the project in development view demo: `$ npm run demo`
+- Make changes.
+- Add appropriate tests
+- `$ npm run test`
+- If tests don't pass, make them pass.
+- Update README with appropriate docs.
+- Rnn build
+- `$ npm run build`
+- Commit and PR.
 
 

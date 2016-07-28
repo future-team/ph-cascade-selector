@@ -136,7 +136,7 @@ export default class CascadeSelector extends Component{
             <div className='cascade-selector'>
                 {
                     hashKey==''?
-                        <div className='cs-item'
+                        <div className='cs-item item-branch'
                              onClick={()=>{
                                 self.setState({
                                     hashKey:1,
@@ -145,6 +145,7 @@ export default class CascadeSelector extends Component{
                                 location.hash='#'+self.hashId+'_'+1;
                             }}>
                             {self.selectedItem?self.selectedItem[self.props.itemValue]:this.props.label}
+                            <span className='item-tip'>请选择</span>
                         </div>
                         :
                     panelList.map((itemList,selectorLevel)=>{
