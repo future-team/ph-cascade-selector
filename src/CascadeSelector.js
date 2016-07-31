@@ -144,8 +144,10 @@ export default class CascadeSelector extends Component{
                                 })
                                 location.hash='#'+self.hashId+'_'+1;
                             }}>
-                            {self.selectedItem?self.selectedItem[self.props.itemValue]:this.props.label}
-                            <span className='item-tip'>请选择</span>
+                            {this.props.label}
+                            {self.selectedItem?
+                                <span className='selected-content'>{self.selectedItem[self.props.itemValue]}</span>
+                                :<span className='item-tip'>请选择</span>}
                         </div>
                         :
                     panelList.map((itemList,selectorLevel)=>{
