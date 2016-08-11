@@ -127,7 +127,8 @@ export default class CascadeSelector extends Component{
             {selectorData}=this.props,
             {tappedIndexArray,hashKey}=this.state,
             itemList=selectorData,
-            panelList=[selectorData];
+            panelList=[selectorData],
+            selectorDataEmpty=!(selectorData&&selectorData.length);
         for(var i=0;i<tappedIndexArray.length;i++){
             panelList.push(itemList[tappedIndexArray[i]].children)
             itemList=itemList[tappedIndexArray[i]].children;
@@ -136,8 +137,12 @@ export default class CascadeSelector extends Component{
             <div className='cascade-selector'>
                 {
                     hashKey==''?
-                        <div className='cs-item item-branch'
+                        <div className={'cs-item item-branch'+(selectorDataEmpty?' disabled':'')}
                              onClick={()=>{
+                                if(selectorDataEmpty){
+                                    self.props.emptyCallback&&self.props.emptyCallback();
+                                    return;
+                                }
                                 self.setState({
                                     hashKey:1,
                                     tappedIndexArray:[]

@@ -2716,13 +2716,16 @@ class Demo extends Component{
             self.setState({
                 selectorData
             });
-        },2000);
+        },100000);
     }
     render(){
         return (
             <div style={{marginTop:'50px'}}>
                 <CascadeSelector
                     selectorData={this.state.selectorData}
+                    emptyCallback={function(){
+                        alert('it is empty');
+                    }}
                     itemClick={function(item){
                     console.log(item);
                 }} label='选择问题分类'>
