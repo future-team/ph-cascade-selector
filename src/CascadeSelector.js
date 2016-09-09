@@ -22,7 +22,8 @@ export default class CascadeSelector extends Component{
     static defaultProps={
         label:'级联选择',
         itemKey:'typeId',
-        itemValue:'typeName'
+        itemValue:'typeName',
+        itemLevel:'level'
     };
     preAndCurHashIndex(){
         let self=this;
@@ -108,6 +109,7 @@ export default class CascadeSelector extends Component{
         this.props.itemClick&&this.props.itemClick({
             [this.props.itemKey]:item[this.props.itemKey],
             [this.props.itemValue]:item[this.props.itemValue],
+            [this.props.itemLevel]:item[this.props.itemLevel],
             nodeType:'branch'
         })
     }
@@ -119,6 +121,7 @@ export default class CascadeSelector extends Component{
         this.props.itemClick&&this.props.itemClick({
             [this.props.itemKey]:item[this.props.itemKey],
             [this.props.itemValue]:item[this.props.itemValue],
+            [this.props.itemLevel]:item[this.props.itemLevel],
             nodeType:'leaf'
         })
     }

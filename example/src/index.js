@@ -2716,7 +2716,7 @@ class Demo extends Component{
             self.setState({
                 selectorData
             });
-        },100000);
+        },1000);
     }
     render(){
         return (
