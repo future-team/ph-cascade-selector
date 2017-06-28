@@ -8,12 +8,18 @@ class Demo extends Component{
         super(props,context);
 
         this.state={
-            selectorData:[]
+            selectorData:[],
+            curItem:null
         }
     }
     componentDidMount(){
         let self=this;
         setTimeout(function(){
+            let curItem={
+                "typeId": 2,
+                "parentTypeId": 0,
+                "typeName": "测试"
+            }
             let selectorData=[
                 {
                     "typeId": 2,
@@ -2714,7 +2720,8 @@ class Demo extends Component{
                 }
             ];
             self.setState({
-                selectorData
+                selectorData,
+                curItem
             });
         },1000);
     }
@@ -2722,6 +2729,7 @@ class Demo extends Component{
         return (
             <div style={{marginTop:'50px'}}>
                 <CascadeSelector
+                    selectedItem={this.state.curItem}
                     selectorData={this.state.selectorData}
                     emptyCallback={function(){
                         alert('it is empty');

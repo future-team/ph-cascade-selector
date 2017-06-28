@@ -131,10 +131,19 @@ export default class CascadeSelector extends Component{
             {tappedIndexArray,hashKey}=this.state,
             itemList=selectorData,
             panelList=[selectorData],
+            curLabel='',
             selectorDataEmpty=!(selectorData&&selectorData.length);
         for(var i=0;i<tappedIndexArray.length;i++){
             panelList.push(itemList[tappedIndexArray[i]].children)
             itemList=itemList[tappedIndexArray[i]].children;
+        }
+        //优先判断this中的selectedItem，没有的话再判断props中的selectdItem
+        if(self.selectedItem){
+            curLabel=self.selectedItem[self.props.itemValue]
+        }else{
+            if(self.props.selectedItem){
+                curLabel=self.props.selectedItem[self.props.itemValue]
+            }
         }
         return(
             <div className='cascade-selector'>
@@ -153,8 +162,8 @@ export default class CascadeSelector extends Component{
                                 location.hash='#'+self.hashId+'_'+1;
                             }}>
                             {this.props.label}
-                            {self.selectedItem?
-                                <span className='selected-content'>{self.selectedItem[self.props.itemValue]}</span>
+                            {curLabel?
+                                <span className='selected-content'>{curLabel}</span>
                                 :<span className='item-tip'>请选择</span>}
                         </div>
                         :
